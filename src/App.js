@@ -1,23 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import { useSelector,useDispatch } from 'react-redux';
+import{setName,setEmail} from './actions/actionCreators';
 
 function App() {
+  let dispatch=useDispatch();
+  let {name,email}=useSelector(state=>state);
+  console.log(name,email)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <input onChange={(e)=>dispatch(setName(e.target.value))} placeholder='enter name'></input>
+      <input onChange={(e)=>dispatch(setEmail(e.target.value))} placeholder='enter email'></input>
+      <br/>
+        Name : <span>{name}</span><br/>
+        Mail : <span><a href={`mailto:${email}`}>{email}</a></span>
+
+      
     </div>
   );
 }
